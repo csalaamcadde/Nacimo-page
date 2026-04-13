@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Nacima</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.floating-text {
+    position: absolute;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 30px #00d2ff;
+    opacity: 0;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    color: red;
+    font-size: 12px;
+    opacity: 0.6;
+    animation: floatUp linear infinite;
+}
+
+.floating-img {
+    position: absolute;
+    border-radius: 12px;
+    opacity: 0;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+    box-shadow: 0 0 10px #ff007f, 0 0 20px #00d2ff;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(110vh) scale(0.5);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+        transform: translateY(-20vh) scale(1.3);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<script>
+let name = "NACIMA ♡";
+const textCount = 50;
+const heartCount = 80;
+const imageCount = 25;
+
+for (let i = 0; i < textCount; i++) {
+    createFloatingText();
+}
+
+for (let i = 0; i < heartCount; i++) {
+    createHeart();
+}
+
+for (let i = 0; i < imageCount; i++) {
+    createImage();
+}
+
+function createFloatingText() {
+    const span = document.createElement('span');
+    span.className = 'floating-text';
+    span.innerText = name;
+
+    span.style.left = Math.random() * 100 + 'vw';
+    span.style.fontSize = (Math.random() * 25 + 15) + 'px';
+    span.style.animationDuration = (Math.random() * 5 + 7) + 's';
+    span.style.animationDelay = Math.random() * 10 + 's';
+
+    document.body.appendChild(span);
+}
+
+function createHeart() {
+    const heart = document.createElement('span');
+    heart.className = 'heart';
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 10 + 10) + 'px';
+    heart.style.animationDuration = (Math.random() * 6 + 6) + 's';
+    heart.style.animationDelay = Math.random() * 10 + 's';
+
+    document.body.appendChild(heart);
+}
+
+function createImage() {
+    const img = document.createElement('img');
+
+    img.src = "https://picsum.photos/200"; // ✅ FIXED
+    img.className = "floating-img";
+
+    img.style.left = Math.random() * 100 + 'vw';
+    img.style.width = (Math.random() * 80 + 50) + 'px';
+    img.style.animationDuration = (Math.random() * 5 + 7) + 's';
+    img.style.animationDelay = Math.random() * 10 + 's';
+
+    document.body.appendChild(img);
+}
+
+function changeName(newName) {
+    name = newName.toUpperCase();
+    document.querySelectorAll('.floating-text').forEach(el => {
+        el.innerText = name;
+    });
+}
+
+document.body.addEventListener("click", () => {
+    let newName = prompt("Enter new name or message:");
+    if (newName && newName.trim() !== "") {
+        changeName(newName);
+    }
+});
+</script>
+
+</body>
+</html>
